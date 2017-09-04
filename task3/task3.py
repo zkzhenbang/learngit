@@ -4,35 +4,41 @@
 from Tkinter import *
 
 top = Tk()
-top.geometry("300x150")
-frm=Frame(top)
-frm_l=Frame(frm)
-frm_r=Frame(frm)
+top.geometry("450x250")
 
-message=Message(frm_l,text="haha")
-message.pack()
+welcome = Label(top, text="注册界面")  # 注册标签
+welcome.pack()
 
-button_f5=Button(frm_r,text="刷新设备")
-button_f5.pack(side=TOP)
-
-# 编辑界面右侧标签显示及按钮
-label_1=Label(frm_r,text="设备1",)
-label_2=Label(frm_r,text="设备2")
-label_3=Label(frm_r,text="设备3")
-button_1=Button(frm_r,text="安装",)
-button_2=Button(frm_r,text="安装")
-button_3=Button(frm_r,text="安装")
-label_1.pack(side=LEFT)
-button_1.pack(side=RIGHT)
-label_2.pack(side=LEFT)
-button_2.pack(side=RIGHT)
-label_3.pack(side=LEFT)
-button_3.pack(side=RIGHT)
-
-
-
+frm = Frame(top)  # 界面框架
+frm_L = Frame(frm)
+frm_R = Frame(frm)
+frm2 = Frame(top)
 frm.pack()
-frm_l.pack(side=LEFT)
-frm_r.pack(side=RIGHT)
+frm_L.pack(side=LEFT)
+frm_R.pack(side=RIGHT)
+frm2.pack()
+
+label_1 = Label(frm_L, text="设备1",width=10,height=2)  # 用户名标签
+label_2 = Label(frm_L, text="设备2",width=10,height=2)  # 密码标签
+label_3 = Label(frm_L, text="设备3",width=10,height=2)  # 再次输入密码标签
+label_1.pack()
+label_2.pack()
+label_3.pack()
+
+
+button_1 = Button (frm_R, text="安装",width=10,height=2)  # 输入框-用户名
+button_1.pack()
+
+
+button_2 = Button (frm_R, text="安装",width=10,height=2)
+button_2.pack()
+
+
+button_3 = Button (frm_R, text="安装",width=10,height=2)
+button_3.pack()
+
+
+
+
 top.mainloop()
 
