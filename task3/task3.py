@@ -3,6 +3,27 @@
 
 from Tkinter import *
 import tkFileDialog
+import subprocess
+import os
+
+
+ # 获得adb devices命令下设备信息
+devices = str(os.popen("adb devices"))
+
+# 获得设备 serial number
+serial_nos = []
+for item in devices.split():
+    filters = ['list', 'of', 'device', 'devices', 'attached']
+    if item.lower() not in filters:
+        serial_nos.append(item)
+
+# 点击安装按钮调用方法
+def getFile():
+    filename = tkFileDialog.askopenfilename(initialdir ='/')
+    print filename
+    print serial_nos
+
+
 
 top = Tk()
 top.geometry("450x250")
@@ -27,11 +48,7 @@ label_2.pack(pady=20)
 label_3.pack(pady=20)
 
 
-def getFile():
-    filename = str(tkFileDialog.askopenfilename(initialdir ='/'))
-    tishi_1=Toplevel()
-    text_filename=Text(tishi_1,text=filename)
-    text_filename.pack()
+
 
 button_1 = Button (frm_R, text="安装",width=8,height=1,command=getFile)  # 输入框-用户名
 button_1.pack(pady=16)
