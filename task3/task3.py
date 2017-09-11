@@ -26,27 +26,35 @@ show_f5.set('欢迎使用')
 
 # 按下刷新设备按钮
 def pressF5():
+    global b
     showf5 = os.popen("adb devices")
     a=showf5.read()
-    show_f5.set(a)
+    # 将adb devices得到的内容放入列表
+    b = a.split()
+    if len(b)>10:
+        show_f5.set("连接设备超过3台，请减少数量")
+    elif len(b)>4 and len(b)<=10:
+        show_f5.set(a)
+    else:
+        show_f5.set("未检测到设备，请重新连接")
 
 # 按下按钮1安装调用方法
 def pressButton_1():
     filename1 = tkFileDialog.askopenfilename(initialdir ='/')
     # 向serial number设备安装filename的包
-    # install_1=os.popen("adb -s <serial number> install filename1")
+    install_1=os.popen("adb -s %s install %s"%(b[4],filename1))
 
 #  按下按钮2安装调用方法
 def pressButton_2():
     filename2 = tkFileDialog.askopenfilename(initialdir ='/')
     # 向serial number设备安装filename2的包
-    # install_1=os.popen("adb -s <serial number> install filename2")
+    install_2=os.popen("adb -s %s install %s"%(b[6],filename2))
 
 #  按下按钮3安装调用方法
 def pressButton_3():
-    filename1 = tkFileDialog.askopenfilename(initialdir ='/')
-    # 向serial number设备安装filename的包
-    # install_1=os.popen("adb -s <serial number> install filename3")
+    filename3 = tkFileDialog.askopenfilename(initialdir ='/')
+    # 向serial number设备安装filename3的包
+    install_3=os.popen("adb -s %s install %s"%(b[8],filename3))
 
 show_l = Frame(top)
 show_l.pack(side=LEFT)
