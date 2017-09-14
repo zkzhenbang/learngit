@@ -38,33 +38,75 @@ def pressF5():
     else:
         show_f5.set("未检测到设备，请重新连接")
 
+
 # 按下按钮1安装调用方法
 def pressButton_1():
     filename1 = tkFileDialog.askopenfilename(initialdir ='/')
-    # 向serial number设备安装filename的包
-    install_1=os.popen("adb -s %s install %s"%(b[4],filename1))
+    try:
+        # 向serial number1的设备安装filename的包
+        install_1=os.popen("adb -s %s install %s"%(b[4],filename1))
+    except:
+        show_f5.set("请点击刷新设备")
+    else:
+        get_result1 = install_1.read()
+        getresult1 = get_result1.split()
+        number1 = (len(getresult1))
+
+
+        if getresult1[number1 - 1] == "Success":
+            show_f5.set("设备1安装成功！")
+        else:
+            show_f5.set("设备1安装失败！")
 
 #  按下按钮2安装调用方法
 def pressButton_2():
     filename2 = tkFileDialog.askopenfilename(initialdir ='/')
-    # 向serial number设备安装filename2的包
-    install_2=os.popen("adb -s %s install %s"%(b[6],filename2))
+    try:
+        # 向serial number2的设备安装filename2的包
+        install_2=os.popen("adb -s %s install %s"%(b[6],filename2))
+    except:
+        show_f5.set("请点击刷新设备")
+    else:
+        get_result2 = install_2.read()
+        getresult2 = get_result2.split()
+        number2=(len(getresult2))
+        if getresult2[number2-1]=="Success":
+            show_f5.set("设备2安装成功！")
+        else:
+            show_f5.set("设备2安装失败！")
+
 
 #  按下按钮3安装调用方法
 def pressButton_3():
-    filename3 = tkFileDialog.askopenfilename(initialdir ='/')
-    # 向serial number设备安装filename3的包
-    install_3=os.popen("adb -s %s install %s"%(b[8],filename3))
+    try:
+        filename3 = tkFileDialog.askopenfilename(initialdir ='/')
+        # 向serial number3的设备安装filename3的包
+        install_3=os.popen("adb -s %s install %s"%(b[8],filename3))
+    except:
+        show_f5.set("请点击刷新设备")
+    else:
+        get_result3 = install_3.read()
+        getresult3 = get_result3.split()
+        number3 = (len(getresult3))
+        if getresult3[number3 - 1] == "Success":
+            show_f5.set("设备3安装成功！")
+        else:
+            show_f5.set("设备3安装失败！")
 
+
+
+# 布局设置
 show_l = Frame(top)
 show_l.pack(side=LEFT)
 show_r = Frame(top)
 show_r.pack(side=RIGHT)
 
+# 界面左侧消息显示框
 messgeShow = Label(show_l, textvariable=show_f5)
 messgeShow.pack()
 messgeShow.propagate(0)
 
+# 刷新设备按钮
 f5 = Button(show_r, text="刷新设备",command=pressF5)
 f5.pack(pady=5)
 
@@ -75,6 +117,7 @@ frm.pack()
 frm_L.pack(side=LEFT)
 frm_R.pack(side=RIGHT)
 
+# 右侧3个设备标签
 label_1 = Label(frm_L, text="设备1",width=8,height=1)
 label_2 = Label(frm_L, text="设备2",width=8,height=1)
 label_3 = Label(frm_L, text="设备3",width=8,height=1)
@@ -82,9 +125,7 @@ label_1.pack(pady=20)
 label_2.pack(pady=20)
 label_3.pack(pady=20)
 
-
-
-
+# 右侧3个安装标签
 button_1 = Button (frm_R, text="安装",width=8,height=1,command=pressButton_1)
 button_1.pack(pady=16,padx=10)
 button_2 = Button (frm_R, text="安装",width=8,height=1,command=pressButton_2)
