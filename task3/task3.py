@@ -24,6 +24,15 @@ top.resizable(0, 0)      #禁止缩放
 show_f5 = StringVar()
 show_f5.set('欢迎使用')
 
+
+# 对安装的结果进行反馈，弹出toplevel提示用户
+def tishi():
+    toplevel_tishi=Toplevel()
+    toplevel_tishi.geometry("200x80+740+380")
+    toplevel_tishi.attributes("-topmost", 1)
+    label_tishi=Label(toplevel_tishi,text=tishi_message)
+    label_tishi.pack()
+
 # 按下刷新设备按钮
 def pressF5():
     global b
@@ -41,6 +50,7 @@ def pressF5():
 
 # 按下按钮1安装调用方法
 def pressButton_1():
+    global tishi_message
     filename1 = tkFileDialog.askopenfilename(initialdir ='/')
     try:
         # 向serial number1的设备安装filename的包
@@ -52,11 +62,13 @@ def pressButton_1():
         getresult1 = get_result1.split()
         number1 = (len(getresult1))
 
-
         if getresult1[number1 - 1] == "Success":
-            show_f5.set("设备1安装成功！")
+            tishi_message="设备1安装成功！"
+            tishi()
+
         else:
-            show_f5.set("设备1安装失败！")
+            tishi_message = "设备1安装失败！"
+            tishi()
 
 #  按下按钮2安装调用方法
 def pressButton_2():
@@ -140,4 +152,3 @@ button_3.pack(pady=18,padx=10)
 
 
 top.mainloop()
-
